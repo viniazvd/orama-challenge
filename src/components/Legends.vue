@@ -2,31 +2,34 @@
   <div class="legends cell padding-1">
     <span class="title">Legenda</span>
 
-    <star-circle-icon size="20" fill-color="#639d31" />
-    <!-- <div v-for="({ icon, legend }) in legends" :key="icon" class="legend">
-      <i :class="['icon', `fi-${icon}`]" />
+    <div v-for="({ name, legend }) in legends" :key="name" class="legend">
+      <component class="icon" :is="name" />
 
       <span class="legend">{{ legend }}</span>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-import StarCircleIcon from 'vue-material-design-icons/StarCircle.vue'
+import StarCircle from './common/icons/StarCircle.vue'
+import CheckCircle from './common/icons/CheckCircle.vue'
+import InformationOutline from './common/icons/InformationOutline.vue'
+import BlockHelper from './common/icons/BlockHelper.vue'
+import Reply from './common/icons/Reply.vue'
 
 export default {
   name: 'legends',
 
-  components: { StarCircleIcon },
+  components: { StarCircle, CheckCircle, InformationOutline, BlockHelper, Reply },
 
   data () {
     return {
       legends: [
-        { icon: 'star', legend: 'Fundo para investidor qualificado' },
-        { icon: 'check', legend: 'Você já investe neste fundo' },
-        { icon: 'info', legend: 'Entenda o resgate deste fundo' },
-        { icon: 'prohibited', legend: 'Fundo fechado para aplicação' }, // icon is not the same, but it is the most similar of their package
-        { icon: 'play', legend: 'Aplicar neste fundo' } // there is no similar icon
+        { name: 'StarCircle', legend: 'Fundo para investidor qualificado' },
+        { name: 'CheckCircle', legend: 'Você já investe neste fundo' },
+        { name: 'InformationOutline', legend: 'Entenda o resgate deste fundo' },
+        { name: 'BlockHelper', legend: 'Fundo fechado para aplicação' },
+        { name: 'Reply', legend: 'Aplicar neste fundo' }
       ]
     }
   }
@@ -42,22 +45,24 @@ export default {
 }
 
 .legends {
-  width: 268px !important;
-  height: 204px !important;
+  max-width: 268px !important;
+  max-height: 204px !important;
   border: 1px solid;
   background: #FAFAFA;
 
   & > .title {
     @extend %text;
+    display: block;
+    margin-bottom: 10px;
     text-transform: uppercase;
   }
 
   & > .legend {
     display: flex;
 
-    & > .icon {
-      margin-right: 8px;
-    }
+    &:not(:last-child) { margin-bottom: 5px; }
+
+    & > .icon { margin-right: 8px; }
 
     & > .legend { @extend %text; }
   }
