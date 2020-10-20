@@ -18,7 +18,6 @@
 
 <script>
 import setupResponsive from '../mixins/setupResponsive'
-// import responsive from '../mixins/responsive'
 
 import LeftFilters from '../components/LeftFilters.vue'
 import RightFilters from '../components/RightFilters.vue'
