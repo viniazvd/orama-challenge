@@ -11,12 +11,15 @@
         <legends />
       </div>
 
-      <right-filters />
+      <right-filters v-if="!isMobile" />
     </div>
   </div>
 </template>
 
 <script>
+import setupResponsive from '../mixins/setupResponsive'
+// import responsive from '../mixins/responsive'
+
 import LeftFilters from '../components/LeftFilters.vue'
 import RightFilters from '../components/RightFilters.vue'
 import Funds from '../components/Funds.vue'
@@ -25,7 +28,9 @@ import Legends from '../components/Legends.vue'
 export default {
   name: 'App',
 
-  components: { LeftFilters, Funds, Legends, RightFilters }
+  components: { LeftFilters, Funds, Legends, RightFilters },
+
+  mixins: [setupResponsive]
 }
 </script>
 
