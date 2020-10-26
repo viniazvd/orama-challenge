@@ -1,0 +1,14 @@
+$font-size: 13px;
+$text-color: #444444;
+$font-family: 'Roboto', sans-serif;
+
+$primary-color-map:  (light: #BC4CF7, dark: #7873EE);
+$positive-color-map: (light: #3CE798, dark: #37CECC);
+$negative-color-map: (light: #FF7987, dark: #FF7EB3);
+$alert-color-map:    (light: #F6D365, dark: #FDA085);
+$info-color-map:     (light: #48C6EF, dark: #4FACFE);
+$disabled-color-map: (light: #E7E9ED, dark: #404A6C);
+$dark-color-map:     (light: #1E3C72, dark: #121E48);
+
+$box-shadow: 6px 6px 25px 0 rgba(97,120,146,0.12);
+$box-shadow-hover: 0 15px 21px -2px rgba(0, 0, 0, 0.125), 3px 3px 6px -1px rgba(0, 0, 0, 0.15);

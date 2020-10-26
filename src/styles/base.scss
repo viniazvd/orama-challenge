@@ -1,0 +1,82 @@
+@import "~foundation-sites/scss/foundation.scss";
+
+// If you use the foundation-everything() mixin in your main Sass file, just pass in $prototype: true to enable the prototype mode.
+// https://get.foundation/sites/docs/prototyping-utilities.html#sass-reference
+@include foundation-everything($prototype: true);
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html,
+#app {
+  min-width: 100%;
+  min-height: 100%;
+
+  width: 100%;
+  height: 100%;
+}
+
+[type='text'] {
+  margin: 0;
+  height: unset;
+  box-shadow: none;
+
+  &:focus { border: unset; box-shadow: none; }
+}
+
+.md-focused {
+  & .icon > svg > path { fill: #639d31; }
+}
+
+.md-field.md-theme-default.md-focused .md-input { color: black !important; } // cursor color
+.md-field.md-theme-default:before { background-color: #639d31 !important; } // border-bottom color
+
+.md-checkbox {
+  & > .md-checkbox-label { font-size: 13.0384px; }
+
+  &.md-checked > .md-checkbox-container {
+    border-color: transparent !important;
+    background-color: #119c9f !important;
+  }
+
+  & > .md-checkbox-container {
+    background-color: white !important;
+    border: 1px solid rgba(0,0,0,0.54) !important;
+
+    & > .md-ripple { height: 20px !important; }
+
+    &::after {
+      top: 2px !important;
+      left: 6px !important;
+      width: 7px !important;
+      height: 11px !important;
+    }
+
+    &::before {
+      height: 20px !important;
+    }
+
+    &:hover { border: 1px solid #119c9f !important; }
+  }
+}
+
+::selection {
+  color: unset !important;
+  background: unset !important;
+}
+
+::-moz-selection {
+  color: unset !important;
+  background: unset !important;
+}
+
+.grid-margin-y > .cell {
+  margin-top: 7.5px !important;
+  margin-bottom: 7.5px !important;
+}
