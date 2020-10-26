@@ -34,19 +34,12 @@ export default {
 // @import "~foundation-sites/scss/foundation.scss";
 // @include foundation-range-input;
 
-%text {
-  color: #444444;
-  font-size: 13.0384px;
-  font-family: 'Roboto', sans-serif;
-}
-
 .c-range {
   display: flex;
   flex-direction: column;
 
   & > .title {
-    @extend %text;
-    font-weight: bold;
+    @include text;
     margin-bottom: 20px;
   }
 
@@ -76,7 +69,7 @@ export default {
   }
 
   & > .footer {
-    @extend %text;
+    @include text;
     margin-top: 10px;
   }
 }
