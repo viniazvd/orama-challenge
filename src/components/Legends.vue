@@ -37,21 +37,17 @@ export default {
 </script>
 
 <style lang="scss">
-%text {
-  color: #444444;
-  font-weight: bold;
-  font-size: 13.0384px;
-  font-family: 'Roboto', sans-serif;
-}
-
 .legends {
+  order: 3;
+  background: white;
+  box-shadow: $box-shadow;
+  height: auto !important;
   max-width: 268px !important;
-  max-height: 204px !important;
-  border: 1px solid;
-  background: #FAFAFA;
+  min-height: 204px !important;
+  @include desktop { margin-bottom: 0 !important; }
 
   & > .title {
-    @extend %text;
+    @include text;
     display: block;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -64,7 +60,7 @@ export default {
 
     & > .icon { margin-right: 8px; }
 
-    & > .legend { @extend %text; }
+    & > .legend { @include text; }
   }
 }
 </style>
