@@ -3,7 +3,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: '@import "./node_modules/foundation-sites/scss/_global.scss";'
+        prependData: `
+        // @import "./node_modules/foundation-sites/scss/foundation.scss";
+        @import "./src/styles/index.scss";
+        `
       }
     }
   }
