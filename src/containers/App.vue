@@ -1,78 +1,114 @@
 <template>
-  <div id="app" class="app">
+  <div v-if="!isLoading" id="app" class="app">
     <img class="logo" alt="Vue logo" src="../assets/logo.png">
 
-    <div class="container grid-x grid-padding-x grid-margin-x align-center margin-top-1">
-      <div class="container-left grid-y grid-margin-y large-6">
-        <left-filters />
+    <div class="container grid-x grid-padding-x align-center margin-bottom-2">
+      <div class="container-left cell large-8 medium-8">
+        <left-filters @sync:search="v => search = v" />
 
-        <funds />
+        <funds-table :list="filteredList" />
 
         <legends />
       </div>
 
-      <right-filters v-if="!isMobile" />
+      <right-filters
+        v-if="!isMobile"
+        class="cell large-2 medium-2"
+        :list="list"
+        :strategies="macroStrategies"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import findBy from '../utils/findBy'
+
 import setupResponsive from '../mixins/setupResponsive'
 
 import LeftFilters from '../components/LeftFilters.vue'
 import RightFilters from '../components/RightFilters.vue'
-import Funds from '../components/Funds.vue'
+import FundsTable from '../components/table/Main.vue'
 import Legends from '../components/Legends.vue'
 
 export default {
   name: 'App',
 
-  components: { LeftFilters, Funds, Legends, RightFilters },
+  components: { LeftFilters, FundsTable, Legends, RightFilters },
 
-  mixins: [setupResponsive]
+  mixins: [setupResponsive],
+
+  data () {
+    return {
+      isLoading: false,
+      hasError: false,
+      list: [],
+      search: ''
+    }
+  },
+
+  async created () {
+    this.isLoading = true
+
+    const url = 'https://s3.amazonaws.com/orama-media/json/fund_detail_full.json?limit=1000&offset=0&serializer=fund_detail_full'
+
+    try {
+      const response = await fetch(url, { method: 'GET' })
+      this.list = await response.json()
+    } catch (error) {
+      this.hasError = true
+    }
+
+    this.isLoading = false
+  },
+
+  computed: {
+    filteredList () {
+      if (!this.search) return this.list
+
+      return findBy(
+        this.list,
+        this.search,
+        ['simple_name', 'specification.fund_macro_strategy.name', 'specification.fund_main_strategy.name'],
+        true
+      )
+    },
+
+    macroStrategies () {
+      if (!this.list.length) return []
+
+      return [
+        ...new Set([...this.list.map(item => item.specification.fund_macro_strategy.name)])
+      ]
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-@import "~foundation-sites/scss/foundation.scss";
-
-// If you use the foundation-everything() mixin in your main Sass file, just pass in $prototype: true to enable the prototype mode.
-// https://get.foundation/sites/docs/prototyping-utilities.html#sass-reference
-@include foundation-everything($prototype: true);
-
-// base.css
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body,
-html,
-#app {
-  min-width: 100%;
-  min-height: 100%;
-
-  width: 100%;
-  height: 100%;
-}
-
-// https://www.figma.com/resources/learn-design/typography/
-// weights generally coordinate to a number on a scale of 100 to 900, with intervals of 100: Regular 400, Medium 500, Semi-Bold 600, Bold 700, etc.
-
 .app {
-  background-color: rgba(0, 0, 0, 0.1);
-  overflow: hidden; // to prevent horizontal scrolling because of the grid-margin-x
+  background-color: #f4f5f7;
+  overflow-x: hidden; // to prevent horizontal scrolling because of the grid-margin-x
 
-  & > .logo { width: 100%; }
+  & > .logo { width: 100%; margin-bottom: 20px; }
 
   & > .container {
-    height: unset;
+    height: auto;
 
      & > .container-left {
-      max-width: 873px;
+      @include desktop { max-width: 873px; }
+
+      @include responsive (xs-mobile, mobile) {
+        width: 100%;
+
+        & > .left-filters { order: 2; }
+        & > .funds-table { order: 3; }
+        & > .legends { order: 1; max-width: 100% !important; }
+      }
+
+      & > div:not(:last-child) {
+        margin-bottom: 15px;
+      }
     }
   }
 }
