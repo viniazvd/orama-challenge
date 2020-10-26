@@ -1,8 +1,8 @@
 export default {
   data () {
     return {
-      xsMobileMedia: window.matchMedia('screen and (max-width: 576px)'),
-      mobileMedia: window.matchMedia('screen and (max-width: 1023px)'),
+      xsMobileMedia: window.matchMedia('screen and (max-width: 335px)'),
+      mobileMedia: window.matchMedia('screen and (max-width: 1024px)'),
       isXsMobile: false,
       isMobile: false
     }
