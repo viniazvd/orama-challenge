@@ -24,7 +24,7 @@
       <div>{{ row.profitabilities.year }}</div>
       <div>{{ row.profitabilities.m12 }}</div>
       <div>{{ row.operability.minimum_initial_application_amount }}</div>
-      <div>{{ row.operability.retrieval_quotation_days_str }}</div>
+      <div>{{ getRetrievalQuotation(row) }}</div>
       <div><reply /></div>
     </c-card>
 
@@ -65,6 +65,14 @@ export default {
   data () {
     return {
       showDetails: false
+    }
+  },
+
+  methods: {
+    getRetrievalQuotation (row) {
+      return ['úteis', 'corridos'].includes(row.operability.retrieval_quotation_days_type) && row.operability.retrieval_special_type === ''
+        ? row.operability.retrieval_quotation_days_str
+        : ''
     }
   }
 }
