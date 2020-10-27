@@ -13,12 +13,12 @@
 
       <div class="levels-wrapper">
         <span
-          v-for="level in levels"
+          v-for="(color, level) in levels"
           class="level"
-          :key="level.value"
-          :style="{ background: level.color, height: 15 + (level.value * 2) + 'px' }"
-          @mouseover="activeLevel = level.value"
-          @click="$emit('select-level', level.value)"
+          :key="level"
+          :style="{ background: color, height: 15 + (level * 2) + 'px' }"
+          @mouseover="activeLevel = level"
+          @click="$emit('select-level', level)"
         />
       </div>
 
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import levels from '../../utils/levels'
+
 import HelpCircle from './icons/HelpCircle'
 
 export default {
@@ -40,21 +42,8 @@ export default {
 
   data () {
     return {
-      activeLevel: 0,
-      levels: [
-        { value: 1, color: '#a6ecfc' },
-        { value: 2, color: '#68f1dd' },
-        { value: 3, color: '#91ed6e' },
-        { value: 4, color: '#b0f42a' },
-        { value: 5, color: '#ddf40c' },
-        { value: 6, color: '#faf00e' },
-        { value: 7, color: '#ffdc00' },
-        { value: 8, color: '#fb0' },
-        { value: 9, color: '#f80' },
-        { value: 10, color: '#ff5e00' },
-        { value: 11, color: '#ff0600' },
-        { value: 12, color: '#b51414' }
-      ]
+      levels,
+      activeLevel: 0
     }
   },
 
