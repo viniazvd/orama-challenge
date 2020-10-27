@@ -8,7 +8,7 @@
       <div v-for="mainStrategy in getMainStragery(macroStrategy)" :key="mainStrategy">
         <table-title :sub-title="mainStrategy" />
 
-        <table-row v-for="(fund, index) in getFunds(mainStrategy)" :key="index" :row="fund" />
+        <table-row v-for="fund in getFunds(mainStrategy)" :key="fund.id" :row="fund" />
       </div>
     </div>
   </div>

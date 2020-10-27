@@ -58,7 +58,7 @@ export default {
     display: grid;
     gap: 5px;
     align-items: center;
-    grid-template-columns: minmax(20%, 1fr) 10% 10% 10% 10% 10% 10% 10%;
+    grid-template-columns: minmax(20%, 1fr) repeat(7, 10%);
 
     padding: 15px;
     cursor: pointer;
@@ -66,6 +66,9 @@ export default {
 
     & > div {
       @include text;
+      @include truncate();
+
+      padding: 10px;
       font-size: 11px;
       font-weight: 400;
       text-align: left;

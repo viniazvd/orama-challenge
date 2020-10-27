@@ -19,7 +19,7 @@ export default { name: 'table-fixed-header' }
 .table-fixed-header {
   display: grid;
   gap: 5px;
-  grid-template-columns: minmax(20%, 1fr) 10% 10% 10% 10% 10% 10% 10%;
+  grid-template-columns: minmax(20%, 1fr) repeat(7, 10%);
 
   height: 80px;
   padding: 15px;
@@ -28,6 +28,7 @@ export default { name: 'table-fixed-header' }
 
   & > div {
     @include text;
+    padding: 10px;
 
     &:not(:first-child) { text-align: right; }
   }
