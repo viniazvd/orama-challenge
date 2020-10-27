@@ -2,11 +2,14 @@
   <div class="table-main cell rounded">
     <table-fixed-header />
 
-    <div v-for="item in list.slice(0, 5)" :key="item.id" class="table">
-      <table-title :title="item.specification.fund_macro_strategy.name" />
-      <table-title :sub-title="item.specification.fund_main_strategy.name" />
+    <div v-for="macroStrategy in macroStrategies" :key="macroStrategy" class="table">
+      <table-title :title="macroStrategy" />
 
-      <table-row :item="item" />
+      <div v-for="mainStrategy in getMainStragery(macroStrategy)" :key="mainStrategy">
+        <table-title :sub-title="mainStrategy" />
+
+        <table-row v-for="(fund, index) in getFunds(mainStrategy)" :key="index" :row="fund" />
+      </div>
     </div>
   </div>
 </template>
@@ -26,9 +29,21 @@ export default {
   },
 
   props: {
-    list: {
-      type: Array,
-      required: true
+    list: { type: Array, required: true },
+    macroStrategies: { type: Array, required: true }
+  },
+
+  methods: {
+    getMainStragery (macroStrategy) {
+      return [
+        ...new Set(this.list
+          .filter(item => item.specification.fund_macro_strategy.name === macroStrategy)
+          .map(item => item.specification.fund_main_strategy.name))
+      ]
+    },
+
+    getFunds (mainStrategy) {
+      return this.list.filter(item => item.specification.fund_main_strategy.name === mainStrategy)
     }
   }
 }
