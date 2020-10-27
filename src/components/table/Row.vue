@@ -5,7 +5,10 @@
       :level="row.specification.fund_risk_profile.score_range_order"
       @click.native="showDetails = !showDetails"
     >
-      <div>{{ row.simple_name }}</div>
+      <div>
+        <div class="name">{{ row.simple_name }} </div>
+        <div class="icons"><star-circle /> <check-circle /></div>
+      </div>
       <div>{{ row.quota_date }}</div>
       <div>{{ row.profitabilities.month }}</div>
       <div>{{ row.profitabilities.year }}</div>
@@ -23,6 +26,9 @@
 
 <script>
 import Reply from '../common/icons/Reply'
+import StarCircle from '../common/icons/StarCircle'
+import CheckCircle from '../common/icons/CheckCircle'
+
 import responsive from '../../mixins/responsive'
 
 export default {
@@ -32,6 +38,8 @@ export default {
 
   components: {
     Reply,
+    StarCircle,
+    CheckCircle,
     Detail: () => import('./Detail'),
     CCard: () => import('../common/CCard'),
     CTransition: () => import('../common/CTransition')
@@ -73,8 +81,24 @@ export default {
       font-weight: 400;
       text-align: left;
 
-      &:not(:first-child) { text-align: right; }
       &:last-child { text-align: center; }
+      &:not(:first-child) { text-align: right; }
+      &:first-child {
+        display: flex;
+        justify-content: space-between;
+
+        overflow: unset;
+        white-space: unset;
+
+        & > .name {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          padding-right: 5px;
+        }
+        & > .icons { display: flex; }
+      }
     }
   }
 }
