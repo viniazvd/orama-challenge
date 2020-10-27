@@ -7,7 +7,17 @@
     >
       <div>
         <div class="name">{{ row.simple_name }} </div>
-        <div class="icons"><star-circle /> <check-circle /></div>
+        <div class="icons">
+          <span>
+            <star-circle v-if="row.specification.is_qualified" />
+            <md-tooltip md-direction="bottom">Fundo para investidor qualificado</md-tooltip>
+          </span>
+
+          <span>
+            <check-circle />
+            <md-tooltip md-direction="bottom">Você já investe neste fundo</md-tooltip>
+          </span>
+        </div>
       </div>
       <div>{{ row.quota_date }}</div>
       <div>{{ row.profitabilities.month }}</div>
