@@ -1,30 +1,22 @@
 <template>
-  <div :class="cardClasses">
+  <div class="c-card" :style="levelStyle">
     <slot />
   </div>
 </template>
 
 <script>
+import levels from '../../utils/levels'
+
 export default {
   name: 'c-card',
 
   props: {
-    red: Boolean,
-    green: Boolean,
-    yellow: Boolean,
-    blue: Boolean
+    level: Number
   },
 
   computed: {
-    cardClasses () {
-      return ['c-card',
-        {
-          '-red': this.red,
-          '-green': this.green,
-          '-yellow': this.yellow,
-          '-blue': this.blue
-        }
-      ]
+    levelStyle () {
+      return { '--level': levels[this.level] }
     }
   }
 }
@@ -45,12 +37,7 @@ export default {
     width: 7px;
     height: 100%;
     min-width: 4px;
-    background: set-radial-gradient($primary-color-map);
+    background: var(--level);
   }
-
-  &.-red::before { background: set-radial-gradient($negative-color-map); }
-  &.-green::before { background: set-radial-gradient($positive-color-map); }
-  &.-yellow::before { background: set-radial-gradient($alert-color-map); }
-  &.-blue::before { background: set-radial-gradient($info-color-map); }
 }
 </style>
