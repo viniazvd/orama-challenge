@@ -2,16 +2,16 @@
   <div class="row-wrapper">
     <c-card
       class="row"
-      :level="item.specification.fund_risk_profile.score_range_order"
+      :level="row.specification.fund_risk_profile.score_range_order"
       @click.native="showDetails = !showDetails"
     >
-      <div>{{ item.simple_name }}</div>
-      <div>{{ item.quota_date }}</div>
-      <div>{{ item.profitabilities.month }}</div>
-      <div>{{ item.profitabilities.year }}</div>
-      <div>{{ item.profitabilities.m12 }}</div>
-      <div>{{ item.operability.minimum_initial_application_amount }}</div>
-      <div>{{ item.operability.retrieval_quotation_days_str }}</div>
+      <div>{{ row.simple_name }}</div>
+      <div>{{ row.quota_date }}</div>
+      <div>{{ row.profitabilities.month }}</div>
+      <div>{{ row.profitabilities.year }}</div>
+      <div>{{ row.profitabilities.m12 }}</div>
+      <div>{{ row.operability.minimum_initial_application_amount }}</div>
+      <div>{{ row.operability.retrieval_quotation_days_str }}</div>
       <div><reply /></div>
     </c-card>
 
@@ -38,7 +38,7 @@ export default {
   },
 
   props: {
-    item: {
+    row: {
       type: Object,
       required: true
     }
