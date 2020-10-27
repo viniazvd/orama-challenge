@@ -6,7 +6,7 @@
       <div class="container-left cell large-8 medium-8">
         <left-filters @sync:search="v => search = v" />
 
-        <funds-table :list="filteredList" />
+        <funds-table :list="filteredList" :macro-strategies="macroStrategies" />
 
         <legends />
       </div>
