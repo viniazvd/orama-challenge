@@ -50,13 +50,6 @@ $responsive_breakpoints: (
   }
 }
 
-@function set-radial-gradient($color: $primary-color-map) {
-  $light-color: map-get($color, light);
-  $dark-color: map-get($color, dark);
-
-  @return radial-gradient(ellipse at top left, $light-color, $dark-color);
-}
-
 @mixin text {
   color: $text-color;
   font-weight: bold;
