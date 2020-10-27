@@ -1,6 +1,10 @@
 <template>
   <div class="row-wrapper">
-    <c-card class="row" red @click.native="showDetails = !showDetails">
+    <c-card
+      class="row"
+      :level="item.specification.fund_risk_profile.score_range_order"
+      @click.native="showDetails = !showDetails"
+    >
       <div>{{ item.simple_name }}</div>
       <div>{{ item.quota_date }}</div>
       <div>{{ item.profitabilities.month }}</div>
