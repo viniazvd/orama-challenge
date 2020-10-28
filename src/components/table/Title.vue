@@ -2,25 +2,24 @@
   <div :class="classes">
     <span class="value">{{ title || subTitle }}</span>
 
-    <span>
-      <help-circle />
-      <md-tooltip v-if="tooltip" md-direction="bottom">{{ tooltip }}</md-tooltip>
-    </span>
+    <c-popover-icon v-if="description" component="help-circle">
+      {{ description }}
+    </c-popover-icon>
   </div>
 </template>
 
 <script>
-import HelpCircle from '../common/icons/HelpCircle'
+import CPopoverIcon from '@components:common/CPopoverIcon'
 
 export default {
   name: 'table-title',
 
-  components: { HelpCircle },
+  components: { CPopoverIcon },
 
   props: {
     title: { String },
     subTitle: { String },
-    tooltip: { String }
+    description: { String }
   },
 
   computed: {
