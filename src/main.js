@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './containers/App.vue'
 
+// globally register all icon components
+import '@icons'
+
 // import 'vue-material-design-icons/styles.css'
 
 import VueMaterial from 'vue-material'
