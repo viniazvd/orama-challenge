@@ -11,12 +11,16 @@ export default {
   name: 'c-card',
 
   props: {
-    level: Number
+    level: Number,
+
+    noBorder: Boolean
   },
 
   computed: {
     levelStyle () {
-      return { '--level': levels[this.level] }
+      return {
+        '--level': this.noBorder ? 'transparent' : levels[this.level]
+      }
     }
   }
 }
