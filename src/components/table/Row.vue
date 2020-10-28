@@ -8,36 +8,39 @@
       <div>
         <div class="name">{{ row.simple_name }} </div>
         <div class="icons">
-          <span>
-            <star-circle v-if="row.specification.is_qualified" />
-            <md-tooltip md-direction="bottom">Fundo para investidor qualificado</md-tooltip>
-          </span>
+          <c-popover-icon v-if="row.specification.is_qualified" component="star-circle">
+            Fundo para investidor qualificado
+          </c-popover-icon>
 
-          <span>
-            <check-circle />
-            <md-tooltip md-direction="bottom">Você já investe neste fundo</md-tooltip>
-          </span>
+          <c-popover-icon component="check-circle">
+            Você já investe neste fundo
+          </c-popover-icon>
         </div>
       </div>
+
       <div>{{ row.quota_date }}</div>
       <div>{{ row.profitabilities.month }}</div>
       <div>{{ row.profitabilities.year }}</div>
       <div>{{ row.profitabilities.m12 }}</div>
       <div>{{ row.operability.minimum_initial_application_amount }}</div>
-      <div>{{ getRetrievalQuotation(row) }}</div>
+
+      <div v-if="showRetrievalQuotation(row)">{{ row.operability.retrieval_quotation_days_str }}</div>
+      <c-popover-icon v-else component="information-outline" style="text-align: right">
+        <p class="title">Dias para conversão do resgate:</p>
+        <div class="info">3º dia útil anterior ao último dia útil do 2º mês calendário subsequente à solicitação de resgate</div>
+      </c-popover-icon>
+
       <div><reply /></div>
     </c-card>
 
     <c-transition v-show="showDetails && !isMobile">
-      <detail />
+      <detail :row="row" />
     </c-transition>
   </div>
 </template>
 
 <script>
-import Reply from '../common/icons/Reply'
-import StarCircle from '../common/icons/StarCircle'
-import CheckCircle from '../common/icons/CheckCircle'
+import CCard from '../common/CCard'
 
 import responsive from '../../mixins/responsive'
 
@@ -47,12 +50,10 @@ export default {
   mixins: [responsive],
 
   components: {
-    Reply,
-    StarCircle,
-    CheckCircle,
+    CCard,
     Detail: () => import('./Detail'),
-    CCard: () => import('../common/CCard'),
-    CTransition: () => import('../common/CTransition')
+    CTransition: () => import('../common/CTransition'),
+    CPopoverIcon: () => import('../common/CPopoverIcon')
   },
 
   props: {
@@ -64,15 +65,15 @@ export default {
 
   data () {
     return {
+      showPopover: false,
       showDetails: false
     }
   },
 
   methods: {
-    getRetrievalQuotation (row) {
-      return ['úteis', 'corridos'].includes(row.operability.retrieval_quotation_days_type) && row.operability.retrieval_special_type === ''
-        ? row.operability.retrieval_quotation_days_str
-        : ''
+    showRetrievalQuotation (row) {
+      return ['úteis', 'corridos'].includes(row.operability.retrieval_quotation_days_type) &&
+        row.operability.retrieval_special_type === ''
     }
   }
 }
@@ -117,6 +118,11 @@ export default {
         }
         & > .icons { display: flex; }
       }
+    }
+
+    & > .c-popover-icon > .c-popover > .popover-card {
+      & > .title { font-weight: bold; }
+      & > .info { font-weight: initial; white-space: initial; }
     }
   }
 }
