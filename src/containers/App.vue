@@ -26,10 +26,10 @@ import findBy from '../utils/findBy'
 
 import setupResponsive from '@mixins/setupResponsive'
 
-import LeftFilters from '@components/LeftFilters.vue'
-import RightFilters from '@components/RightFilters.vue'
-import FundsTable from '@components/table/Main.vue'
-import Legends from '@components/Legends.vue'
+import LeftFilters from '@components/LeftFilters'
+import RightFilters from '@components/RightFilters'
+import FundsTable from '@components/table/Main'
+import Legends from '@components/Legends'
 
 export default {
   name: 'App',
