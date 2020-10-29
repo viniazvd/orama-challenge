@@ -25,7 +25,7 @@
       <div>{{ row.operability.minimum_initial_application_amount }}</div>
 
       <div v-if="showRetrievalQuotation(row)">{{ row.operability.retrieval_quotation_days_str }}</div>
-      <c-popover-icon v-else component="information-outline" style="text-align: right">
+      <c-popover-icon v-else component="information-outline">
         <p class="title">Dias para conversão do resgate:</p>
         <div class="info">3º dia útil anterior ao último dia útil do 2º mês calendário subsequente à solicitação de resgate</div>
       </c-popover-icon>
@@ -120,9 +120,13 @@ export default {
       }
     }
 
-    & > .c-popover-icon > .c-popover > .popover-card {
-      & > .title { font-weight: bold; }
-      & > .info { font-weight: initial; white-space: initial; }
+    & > .c-popover-icon {
+      text-align: right;
+
+      & > .c-popover > .popover-card {
+        & > .title { font-weight: bold; }
+        & > .info { font-weight: initial; white-space: initial; }
+      }
     }
   }
 }
