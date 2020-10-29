@@ -34,6 +34,12 @@ html,
   & .icon > svg > path { fill: #639d31; }
 }
 
+.label {
+  color: unset !important;
+  background: unset !important;
+  padding: unset !important;
+}
+
 .md-field.md-theme-default.md-focused .md-input { color: black !important; } // cursor color
 .md-field.md-theme-default:before { background-color: #639d31 !important; } // border-bottom color
 
