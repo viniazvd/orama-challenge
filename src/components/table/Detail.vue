@@ -39,7 +39,7 @@
           {{ row.fees.administration_fee }}
 
           <c-popover-icon component="help-circle">
-            Total de dias após a conversão para que o valor do resgate esteja disponível em sua Subconta Órama.
+            Taxa anual cobrada pelo Administrador do Fundo como remuneração pelos serviços prestados.
           </c-popover-icon>
         </span>
       </div>
@@ -49,26 +49,26 @@
           {{ row.operability.application_time_limit }}
 
           <c-popover-icon component="help-circle">
-            Total de dias para que o valor aplicado seja convertido em cotas do fundo.
+            Horário limite para que a aplicação seja efetivada no mesmo dia. Cancelamentos só poderão ser realizados até esse horário.
           </c-popover-icon>
         </span>
       </div>
       <div>
         <span class="label">Volatilidade 12 meses:</span>
-        <span class="value">{{ (row.volatility_12m * 100).toFixed(2).replace('.', ',') + '%' }}</span>
+        <span class="value">
+          {{ (row.volatility_12m * 100).toFixed(2).replace('.', ',') + '%' }}
+
+          <c-popover-icon component="help-circle">
+            Medida de dispersão de retornos em relação à sua média. Quanto maior a volatilidade, mais a rentabilidade de um ativo pode variar.
+          </c-popover-icon>
+        </span>
       </div>
 
       <div class="link">Conheça mais informações sobre este fundo</div>
 
       <div>
         <span class="label">CNPJ do fundo:</span>
-        <span class="value">
-          {{ row.cnpj }}
-
-          <c-popover-icon component="help-circle">
-            Total de dias para que o valor aplicado seja convertido em cotas do fundo.
-          </c-popover-icon>
-        </span>
+        <span class="value">{{ row.cnpj }}</span>
       </div>
     </div>
   </div>
