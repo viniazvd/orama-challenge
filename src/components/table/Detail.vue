@@ -125,6 +125,7 @@ export default {
       & > .value {
         display: flex;
         font-weight: normal;
+        line-break: anywhere;
 
         & > .c-popover-icon { margin-left: 5px; }
       }
