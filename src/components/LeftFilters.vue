@@ -5,7 +5,7 @@
       <search-icon class="icon" />
     </md-field>
 
-    <div v-if="!isMobile" class="controls padding-2 grid-x align-spaced background-primary">
+    <div v-if="!isSmallScreen" class="controls padding-2 grid-x align-spaced background-primary">
       <c-range
         class="minimal-application"
 

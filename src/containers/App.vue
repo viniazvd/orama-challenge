@@ -12,7 +12,7 @@
       </div>
 
       <right-filters
-        v-if="!isMobile"
+        v-if="!isSmallScreen"
         class="cell large-2 medium-2"
         :list="list"
         :strategies="macroStrategies"

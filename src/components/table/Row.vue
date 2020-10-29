@@ -33,7 +33,7 @@
       <div><reply /></div>
     </c-card>
 
-    <c-transition v-show="showDetails && !isMobile">
+    <c-transition v-show="showDetails && (isLargeScreen || isVeryLargeScreen)">
       <detail :row="row" />
     </c-transition>
   </div>
