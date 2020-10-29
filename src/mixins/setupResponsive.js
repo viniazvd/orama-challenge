@@ -1,25 +1,40 @@
 export default {
   data () {
     return {
-      xsMobileMedia: window.matchMedia('screen and (max-width: 335px)'),
-      mobileMedia: window.matchMedia('screen and (max-width: 1024px)'),
-      isXsMobile: false,
-      isMobile: false
+      smallScreen: window.matchMedia('screen and (max-width: 334px)'),
+      mediumScreen: window.matchMedia('screen and (min-width: 335px) and (max-width: 769px)'),
+      largeScreen: window.matchMedia('screen and (min-width: 770px) and (max-width: 1023px)'),
+      veryLargeScreen: window.matchMedia('screen and (min-width: 1024px)'),
+
+      isSmallScreen: false,
+      isMediumScreen: false,
+      isLargeScreen: false,
+      isVeryLargeScreen: false
     }
   },
 
   methods: {
     setBreakpoint () {
-      this.isMobile = this.mobileMedia && this.mobileMedia.matches
-      this.isXsMobile = this.xsMobileMedia && this.xsMobileMedia.matches
+      this.isSmallScreen = this.smallScreen && this.smallScreen.matches
+      this.isMediumScreen = this.mediumScreen && this.mediumScreen.matches
+      this.isLargeScreen = this.largeScreen && this.largeScreen.matches
+      this.isVeryLargeScreen = this.veryLargeScreen && this.veryLargeScreen.matches
     },
 
-    getIsXsMobile () {
-      return this.isXsMobile
+    getIsSmallScreen () {
+      return this.isSmallScreen
     },
 
-    getIsMobile () {
-      return this.isMobile
+    getIsMediumScreen () {
+      return this.isMediumScreen
+    },
+
+    getIsLargeScreen () {
+      return this.isLargeScreen
+    },
+
+    getIsVeryLargeScreen () {
+      return this.isVeryLargeScreen
     },
 
     onOrientationChange () {
@@ -33,22 +48,28 @@ export default {
   },
 
   beforeDestroy () {
-    this.mobileMedia.removeListener(this.setBreakpoint)
-    this.xsMobileMedia.removeListener(this.setBreakpoint)
+    this.smallScreen.removeListener(this.setBreakpoint)
+    this.mediumScreen.removeListener(this.setBreakpoint)
+    this.largeScreen.removeListener(this.setBreakpoint)
+    this.veryLargeScreen.removeListener(this.setBreakpoint)
     window.removeEventListener('orientationchange', this.onOrientationChange)
   },
 
   mounted () {
-    this.mobileMedia.addListener(this.setBreakpoint)
-    this.xsMobileMedia.addListener(this.setBreakpoint)
+    this.smallScreen.addListener(this.setBreakpoint)
+    this.mediumScreen.addListener(this.setBreakpoint)
+    this.largeScreen.addListener(this.setBreakpoint)
+    this.veryLargeScreen.addListener(this.setBreakpoint)
     window.addEventListener('orientationchange', this.onOrientationChange)
     this.setBreakpoint()
   },
 
   provide () {
     return {
-      getIsXsMobile: this.getIsXsMobile,
-      getIsMobile: this.getIsMobile
+      getIsSmallScreen: this.getIsSmallScreen,
+      getIsMediumScreen: this.getIsMediumScreen,
+      getIsLargeScreen: this.getIsLargeScreen,
+      getIsVeryLargeScreen: this.getIsVeryLargeScreen
     }
   }
 }
