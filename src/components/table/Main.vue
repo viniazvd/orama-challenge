@@ -8,7 +8,7 @@
       <div v-for="({ name: mainStrategy, description }) in getMainStragery(macroStrategy)" :key="mainStrategy">
         <table-title :sub-title="mainStrategy" :description="description" />
 
-        <table-row v-for="fund in getFunds(mainStrategy)" :key="fund.id" :row="fund" />
+        <table-row-desktop v-for="fund in getFunds(mainStrategy)" :key="fund.id" :row="fund" />
       </div>
     </div>
   </div>
@@ -17,7 +17,6 @@
 <script>
 import removeDuplicates from '@utils/removeDuplicates'
 
-import TableRow from './Row'
 import TableTitle from './Title'
 import TableFixedHeader from './FixedHeader'
 
@@ -25,9 +24,9 @@ export default {
   name: 'table-main',
 
   components: {
-    TableRow,
     TableTitle,
-    TableFixedHeader
+    TableFixedHeader,
+    TableRowDesktop: () => import('./RowDesktop')
   },
 
   props: {
