@@ -64,7 +64,7 @@
         </span>
       </div>
 
-      <div class="link">Conheça mais informações sobre este fundo</div>
+      <div class="link" @click="redirect">Conheça mais informações sobre este fundo</div>
 
       <div>
         <span class="label">CNPJ do fundo:</span>
@@ -86,6 +86,14 @@ export default {
     row: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    redirect () {
+      if (!this.row.id) return
+
+      window.location.href = `https://www.orama.com.br/investimentos/fundos-de-investimento/${this.row.id}`
     }
   }
 }
