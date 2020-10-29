@@ -1,5 +1,5 @@
 <template>
-  <div class="row-wrapper">
+  <div class="row-wrapper-desktop">
     <c-card
       class="row"
       :level="row.specification.fund_risk_profile.score_range_order"
@@ -45,7 +45,7 @@ import CCard from '../common/CCard'
 import responsive from '../../mixins/responsive'
 
 export default {
-  name: 'table-row',
+  name: 'table-row-desktop',
 
   mixins: [responsive],
 
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss">
-.row-wrapper {
+.row-wrapper-desktop {
   & > .row {
     display: grid;
     gap: 5px;
