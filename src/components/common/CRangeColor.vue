@@ -2,10 +2,9 @@
   <div class="c-range-color">
     <div class="title">
       Perfil de risco de fundo
-      <help-circle />
-      <md-tooltip md-direction="bottom">
+      <c-popover-icon component="help-circle">
         Cada fundo é classificado considerando a política de investimento e os riscos inerentes aos ativos e mercados em que pode investir.
-      </md-tooltip>
+      </c-popover-icon>
     </div>
 
     <div class="content">
@@ -33,12 +32,12 @@
 <script>
 import levels from '../../utils/levels'
 
-import HelpCircle from './icons/HelpCircle'
+import CPopoverIcon from '@components:common/CPopoverIcon'
 
 export default {
   name: 'c-range-color',
 
-  components: { HelpCircle },
+  components: { CPopoverIcon },
 
   data () {
     return {
@@ -68,8 +67,15 @@ export default {
   position: relative;
 
   & > .title {
-    text-align: center;
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
+
+    & > .c-popover-icon {
+      margin-left: 5px;
+
+      & > .help-circle-icon { display: flex; }
+    }
   }
 
   & > .content {
