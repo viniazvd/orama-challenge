@@ -56,7 +56,7 @@
       <div>
         <span class="label">Volatilidade 12 meses:</span>
         <span class="value">
-          {{ (row.volatility_12m * 100).toFixed(2).replace('.', ',') + '%' }}
+          {{ toPercentage(row.volatility_12m) }}
 
           <c-popover-icon component="help-circle">
             Medida de dispersão de retornos em relação à sua média. Quanto maior a volatilidade, mais a rentabilidade de um ativo pode variar.
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import toPercentage from '@utils/toPercentage'
+
 export default {
   name: 'table-fund-detail',
 
@@ -90,6 +92,8 @@ export default {
   },
 
   methods: {
+    toPercentage,
+
     redirect () {
       if (!this.row.id) return
 
