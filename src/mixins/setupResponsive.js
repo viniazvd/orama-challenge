@@ -26,10 +26,10 @@ export default {
     setBreakpoint (e) {
       // if ((!e || !e.matches) && this.isMounted) return
 
-      this.isSmallScreen = this.smallScreen && this.smallScreen.matches
-      this.isMediumScreen = this.mediumScreen && this.mediumScreen.matches
-      this.isLargeScreen = this.largeScreen && this.largeScreen.matches
-      this.isVeryLargeScreen = this.veryLargeScreen && this.veryLargeScreen.matches
+      this.isSmallScreen = !!this.smallScreen?.matches
+      this.isMediumScreen = !!this.mediumScreen?.matches
+      this.isLargeScreen = !!this.largeScreen?.matches
+      this.isVeryLargeScreen = !!this.veryLargeScreen?.matches
     },
 
     getIsSmallScreen () {
