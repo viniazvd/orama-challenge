@@ -1,7 +1,7 @@
 $responsive_breakpoints: (
-  xs-mobile:  0px,
-  mobile: 576px,
-  tablet:  1025px,
+  xs-mobile:  334px,
+  mobile: 770px,
+  tablet:  1024px,
   desktop: 1225px
 );
 
@@ -33,7 +33,7 @@ $responsive_breakpoints: (
 
 @mixin responsive ($media1, $media2) {
   @if $media1 == xs-mobile and $media2 == mobile {
-    @media only screen and (max-width: #{map-get($responsive_breakpoints, tablet) - 1px})
+    @media only screen and (max-width: #{map-get($responsive_breakpoints, mobile) - 1px})
     { @content; }
   } @else if $media1 == xs-mobile and $media2 == tablet {
     @media only screen and (max-width: #{map-get($responsive_breakpoints, desktop) - 1px})
