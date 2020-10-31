@@ -24,7 +24,22 @@
       <div>{{ row.profitabilities.m12 }}</div>
       <div>{{ row.operability.minimum_initial_application_amount }}</div>
 
-      <div v-if="showRetrievalQuotation(row)">{{ row.operability.retrieval_quotation_days_str }}</div>
+      <c-tooltip
+        position="top"
+        arrow-spacing="5"
+        :show="showRetrievalQuotationDays"
+        :target="$refs.retrievalQuotationDays"
+        :value="row.operability.retrieval_quotation_days_str"
+      />
+
+      <div
+        v-if="showRetrievalQuotation(row)"
+        ref="retrievalQuotationDays"
+        @mouseout="showRetrievalQuotationDays = false"
+        @mouseenter="showRetrievalQuotationDays = true"
+      >
+        {{ row.operability.retrieval_quotation_days_str }}
+      </div>
       <c-popover-icon v-else component="information-outline">
         <p class="title">Dias para conversão do resgate:</p>
         <div class="info">3º dia útil anterior ao último dia útil do 2º mês calendário subsequente à solicitação de resgate</div>
@@ -52,6 +67,7 @@ export default {
   components: {
     CCard,
     Detail: () => import('./Detail'),
+    CTooltip: () => import('../common/CTooltip'),
     CTransition: () => import('../common/CTransition'),
     CPopoverIcon: () => import('../common/CPopoverIcon')
   },
@@ -66,7 +82,8 @@ export default {
   data () {
     return {
       showPopover: false,
-      showDetails: false
+      showDetails: false,
+      showRetrievalQuotationDays: false
     }
   },
 
