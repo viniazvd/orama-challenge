@@ -1,6 +1,6 @@
 <template>
   <div class="table-main cell rounded">
-    <table-fixed-header />
+    <table-fixed-header v-if="!isSmallScreen && !isMediumScreen" />
 
     <div v-for="macroStrategy in macroStrategies" :key="macroStrategy" class="table">
       <table-title :title="macroStrategy" :description="getDescription(macroStrategy)" />
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import responsive from '@mixins/responsive'
+
 import removeDuplicates from '@utils/removeDuplicates'
 
 import TableTitle from './Title'
@@ -28,6 +30,8 @@ export default {
     TableFixedHeader,
     TableRowDesktop: () => import('./RowDesktop')
   },
+
+  mixins: [responsive],
 
   props: {
     list: { type: Array, required: true },
@@ -66,7 +70,7 @@ export default {
 <style lang="scss">
 .table-main {
   order: 2;
-  width: 873px;
+  max-width: 873px;
   height: unset !important;
   // box-shadow: $box-shadow;
 }
