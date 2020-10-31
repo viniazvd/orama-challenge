@@ -1,5 +1,5 @@
 <template>
-  <div class="legends cell padding-1">
+  <div class="legends">
     <span class="title">Legenda</span>
 
     <div v-for="({ name, legend }) in legends" :key="name" class="legend">
@@ -39,6 +39,7 @@ export default {
 <style lang="scss">
 .legends {
   order: 3;
+  padding: 20px;
   background: white;
   box-shadow: $box-shadow;
   height: auto !important;

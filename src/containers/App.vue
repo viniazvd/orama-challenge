@@ -2,9 +2,9 @@
   <div v-if="!isLoading" id="app" class="app">
     <img class="logo" alt="Vue logo" src="../assets/logo.png">
 
-    <div class="container grid-x grid-padding-x align-center margin-bottom-2">
-      <div class="container-left cell large-8 medium-8">
-        <left-filters @sync:search="v => search = v" />
+    <div class="container grid-x align-center">
+      <div class="container-left">
+        <left-filters v-if="isLargeScreen || isVeryLargeScreen" @sync:search="v => search = v" />
 
         <funds-table :list="filteredList" :macro-strategies="macroStrategies" />
 
@@ -12,8 +12,7 @@
       </div>
 
       <right-filters
-        v-if="!isSmallScreen"
-        class="cell large-2 medium-2"
+        v-if="isVeryLargeScreen"
         :list="list"
         :strategies="macroStrategies"
       />
@@ -87,28 +86,29 @@ export default {
 
 <style lang="scss">
 .app {
+  overflow-x: hidden;
   background-color: #f4f5f7;
-  overflow-x: hidden; // to prevent horizontal scrolling because of the grid-margin-x
 
   & > .logo { width: 100%; margin-bottom: 20px; }
 
   & > .container {
     height: auto;
+    margin-bottom: 60px;
+    flex-flow: row nowrap;
 
      & > .container-left {
-      @include desktop { max-width: 873px; }
+      margin: 0 30px;
+      max-width: 875px;
 
       @include responsive (xs-mobile, mobile) {
-        width: 100%;
+        flex-basis: 100%;
 
         & > .left-filters { order: 2; }
         & > .funds-table { order: 3; }
         & > .legends { order: 1; max-width: 100% !important; }
       }
 
-      & > div:not(:last-child) {
-        margin-bottom: 15px;
-      }
+      & > div:not(:last-child) { margin-bottom: 15px; }
     }
   }
 }

@@ -1,11 +1,11 @@
 <template>
-  <div class="left-filters radius padding-1">
+  <div class="left-filters">
     <md-field class="search">
       <md-input placeholder="Buscar fundo por nome" v-model="search" />
       <search-icon class="icon" />
     </md-field>
 
-    <div v-if="!isSmallScreen" class="controls padding-2 grid-x align-spaced background-primary">
+    <div v-if="!isSmallScreen" class="controls grid-x">
       <c-range
         class="minimal-application"
 
@@ -74,6 +74,7 @@ export default {
 <style lang="scss">
 .left-filters {
   order: 1;
+  padding: 20px;
   box-shadow: $box-shadow;
   height: unset !important;
   background-color: white;
@@ -88,12 +89,21 @@ export default {
   }
 
   & > .controls {
-    background: #FAFAFA;
+    flex-flow: nowrap;
     align-items: center;
     justify-content: space-between;
 
-    @media only screen and (max-width: #{map-get($responsive_breakpoints, desktop) - 1px}) {
-      flex-direction: column !important;
+    background: #FAFAFA;
+    padding: 35px 25px 30px;
+
+    @media only screen and (min-width: 1460px) and (max-width: 1416px) {
+      justify-content: center !important;
+
+      & > div:not(:last-child) { margin-bottom: 25px; }
+    }
+
+    @media only screen and (max-width: #{map-get($responsive_breakpoints, mobile)}) {
+      justify-content: center !important;
 
       & > div:not(:last-child) { margin-bottom: 25px; }
     }
