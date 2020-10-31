@@ -7,6 +7,7 @@ function resolveSrc (_path) {
 const aliases = {
   '@utils': 'src/utils',
   '@assets': 'src/assets',
+  '@styles': 'src/styles',
   '@mixins': 'src/mixins',
   '@containers': 'src/containers',
   '@components': 'src/components',
