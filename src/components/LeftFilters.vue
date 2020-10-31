@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { toMoney } from '../utils/toMoney'
+import toMoney from '../utils/toMoney'
 import responsive from '../mixins/responsive'
 
 import CRange from './common/CRange'
