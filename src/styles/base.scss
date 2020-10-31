@@ -1,8 +1,4 @@
-@import "~foundation-sites/scss/foundation.scss";
-
-// If you use the foundation-everything() mixin in your main Sass file, just pass in $prototype: true to enable the prototype mode.
-// https://get.foundation/sites/docs/prototyping-utilities.html#sass-reference
-@include foundation-everything($prototype: true);
+@import "../assets/css/foundation.scss";
 
 *,
 *::before,
@@ -44,7 +40,12 @@ html,
 .md-field.md-theme-default:before { background-color: #639d31 !important; } // border-bottom color
 
 .md-checkbox {
-  & > .md-checkbox-label { font-size: 13.0384px; }
+  margin: 0;
+
+  & > .md-checkbox-label {
+    height: unset;
+    font-size: 13px;
+  }
 
   &.md-checked > .md-checkbox-container {
     border-color: transparent !important;
@@ -52,6 +53,7 @@ html,
   }
 
   & > .md-checkbox-container {
+    align-self: center;
     background-color: white !important;
     border: 1px solid rgba(0,0,0,0.54) !important;
 
@@ -70,25 +72,6 @@ html,
 
     &:hover { border: 1px solid #119c9f !important; }
   }
-}
-
-.md-tooltip {
-  height: auto;
-  max-width: 230px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  padding: 10px;
-  font-size: 12px;
-  white-space: unset;
-  border-radius: 5px;
-  font-family: Roboto;
-
-  color: #444444 !important;
-  border: 1px solid #444444;
-  background-color: white !important;
 }
 
 ::selection {
