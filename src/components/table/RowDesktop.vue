@@ -19,10 +19,10 @@
       </div>
 
       <div>{{ formatDate(row.quota_date) }}</div>
-      <div>{{ row.profitabilities.month }}</div>
-      <div>{{ row.profitabilities.year }}</div>
-      <div>{{ row.profitabilities.m12 }}</div>
-      <div>{{ row.operability.minimum_initial_application_amount }}</div>
+      <div>{{ toPercentage(row.profitabilities.month) }}</div>
+      <div>{{ toPercentage(row.profitabilities.year) }}</div>
+      <div>{{ toPercentage(row.profitabilities.m12) }}</div>
+      <div>{{ toMoney(row.operability.minimum_initial_application_amount) }}</div>
 
       <c-tooltip
         position="top"
@@ -55,7 +55,9 @@
 </template>
 
 <script>
+import toMoney from '@utils/toMoney'
 import formatDate from '@utils/formatDate'
+import toPercentage from '@utils/toPercentage'
 
 import CCard from '../common/CCard'
 
@@ -90,7 +92,9 @@ export default {
   },
 
   methods: {
+    toMoney,
     formatDate,
+    toPercentage,
 
     showRetrievalQuotation (row) {
       return ['úteis', 'corridos'].includes(row.operability.retrieval_quotation_days_type) &&
