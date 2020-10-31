@@ -17,18 +17,17 @@ export default { name: 'table-fixed-header' }
 
 <style lang="scss">
 .table-fixed-header {
-  display: grid;
   gap: 5px;
+  display: grid;
+  align-items: end;
   grid-template-columns: minmax(20%, 1fr) repeat(7, 10%);
 
   height: 80px;
-  padding: 15px;
+  padding: 0 20px 15px;
   background: white;
-  align-items: end;
 
   & > div {
     @include text;
-    padding: 10px;
 
     &:not(:first-child) { text-align: right; }
   }

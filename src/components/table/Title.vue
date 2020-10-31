@@ -40,16 +40,14 @@ export default {
   display: flex;
 
   height: 50px;
-  padding: 15px;
+  padding: 20px;
 
   &.--is-title {
     background: #EDEDED;
     text-transform: uppercase;
   }
 
-  &.--is-sub-title {
-    background: #FAFAFA;
-  }
+  &.--is-sub-title { background: #FAFAFA; }
 
   & > .value {
     @include text;

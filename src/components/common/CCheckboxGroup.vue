@@ -97,7 +97,7 @@ export default {
   &:not(:last-child) { margin-bottom: 10px; }
 
   & > .items-wrapper {
-    width: 270px;
+    max-width: 270px;
 
     & > .md-checkbox { margin: 0; }
 

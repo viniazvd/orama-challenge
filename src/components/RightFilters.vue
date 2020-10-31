@@ -9,7 +9,7 @@
       :items="getItems(strategy)"
     />
 
-    <div class="title">Filtrar por gestores:</div>
+    <div class="title manager">Filtrar por gestores:</div>
 
     <c-checkbox-group description="Gestores" :items="filteredManagers">
       <md-field class="search">
@@ -74,8 +74,8 @@ export default {
 }
 
 .right-filters {
-  max-width: 270px;
-  width: 100% !important;
+  width: 270px;
+  margin-right: 30px;
 
   & > .title {
     @include text;
@@ -83,6 +83,8 @@ export default {
     font-weight: 400;
     margin-bottom: 15px;
   }
+
+  & > .manager { margin-top: 20px; }
 
   & > .c-checkbox-group > .items-wrapper > .search {
     margin: 0;
