@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './containers/App.vue'
+import App from './containers/App'
 
 // globally register all icon components
 import '@icons'

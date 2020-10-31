@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
+import InformationOutline from 'vue-material-design-icons/InformationOutline'
 
 export default {
   name: 'information-outline-icon',

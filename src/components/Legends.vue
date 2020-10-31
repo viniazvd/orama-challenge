@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import StarCircle from './common/icons/StarCircle.vue'
-import CheckCircle from './common/icons/CheckCircle.vue'
-import InformationOutline from './common/icons/InformationOutline.vue'
-import BlockHelper from './common/icons/BlockHelper.vue'
-import Reply from './common/icons/Reply.vue'
+import StarCircle from './common/icons/StarCircle'
+import CheckCircle from './common/icons/CheckCircle'
+import InformationOutline from './common/icons/InformationOutline'
+import BlockHelper from './common/icons/BlockHelper'
+import Reply from './common/icons/Reply'
 
 export default {
   name: 'legends',

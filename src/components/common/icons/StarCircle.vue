@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import StarCircle from 'vue-material-design-icons/StarCircle.vue'
+import StarCircle from 'vue-material-design-icons/StarCircle'
 
 export default {
   name: 'star-circle-icon',

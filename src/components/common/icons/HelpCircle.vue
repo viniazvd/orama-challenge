@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import HelpCircle from 'vue-material-design-icons/HelpCircle.vue'
+import HelpCircle from 'vue-material-design-icons/HelpCircle'
 
 export default {
   name: 'help-helper-icon',

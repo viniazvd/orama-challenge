@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Arrow from 'vue-material-design-icons/MenuUp.vue'
+import Arrow from 'vue-material-design-icons/MenuUp'
 
 export default {
   name: 'arrow-icon',

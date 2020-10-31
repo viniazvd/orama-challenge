@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Reply from 'vue-material-design-icons/Reply.vue'
+import Reply from 'vue-material-design-icons/Reply'
 
 export default {
   name: 'reply-icon',

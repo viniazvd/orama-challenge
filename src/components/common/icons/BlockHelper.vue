@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BlockHelper from 'vue-material-design-icons/BlockHelper.vue'
+import BlockHelper from 'vue-material-design-icons/BlockHelper'
 
 export default {
   name: 'block-helper-icon',

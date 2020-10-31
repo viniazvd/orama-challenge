@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import CheckCircle from 'vue-material-design-icons/CheckCircle.vue'
+import CheckCircle from 'vue-material-design-icons/CheckCircle'
 
 export default {
   name: 'block-helper-icon',

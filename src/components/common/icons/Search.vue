@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Magnify from 'vue-material-design-icons/Magnify.vue'
+import Magnify from 'vue-material-design-icons/Magnify'
 
 export default {
   name: 'magnify-icon',
