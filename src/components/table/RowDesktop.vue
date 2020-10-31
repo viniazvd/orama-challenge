@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div>{{ row.quota_date }}</div>
+      <div>{{ formatDate(row.quota_date) }}</div>
       <div>{{ row.profitabilities.month }}</div>
       <div>{{ row.profitabilities.year }}</div>
       <div>{{ row.profitabilities.m12 }}</div>
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import formatDate from '@utils/formatDate'
+
 import CCard from '../common/CCard'
 
 import responsive from '../../mixins/responsive'
@@ -88,6 +90,8 @@ export default {
   },
 
   methods: {
+    formatDate,
+
     showRetrievalQuotation (row) {
       return ['úteis', 'corridos'].includes(row.operability.retrieval_quotation_days_type) &&
         row.operability.retrieval_special_type === ''
