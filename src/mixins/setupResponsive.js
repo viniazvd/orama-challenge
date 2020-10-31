@@ -11,7 +11,7 @@ export default {
       smallScreen: window.matchMedia(`screen and (max-width: ${breakpoints.small}px)`),
       mediumScreen: window.matchMedia(`screen and (min-width: ${breakpoints.small + 1}px) and (max-width: ${breakpoints.medium}px)`),
       largeScreen: window.matchMedia(`screen and (min-width: ${breakpoints.medium + 1}px) and (max-width: ${breakpoints.large}px)`),
-      veryLargeScreen: window.matchMedia(`screen and (min-width: ${breakpoints.veryLarge}px)`),
+      veryLargeScreen: window.matchMedia(`screen and (min-width: ${breakpoints.large + 1}px)`),
 
       isSmallScreen: false,
       isMediumScreen: false,
