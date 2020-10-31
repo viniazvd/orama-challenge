@@ -18,7 +18,21 @@
         </div>
       </div>
 
-      <div>{{ formatDate(row.quota_date) }}</div>
+      <c-tooltip
+        position="top"
+        arrow-spacing="5"
+        :show="showQuotaDate"
+        :target="$refs.quotaDate"
+        :value="formatDate(row.quota_date)"
+      />
+
+      <div
+        ref="quotaDate"
+        @mouseout="showQuotaDate = false"
+        @mouseenter="showQuotaDate = true"
+      >
+        {{ formatDate(row.quota_date) }}
+      </div>
       <div>{{ toPercentage(row.profitabilities.month) }}</div>
       <div>{{ toPercentage(row.profitabilities.year) }}</div>
       <div>{{ toPercentage(row.profitabilities.m12) }}</div>
@@ -87,6 +101,7 @@ export default {
     return {
       showPopover: false,
       showDetails: false,
+      showQuotaDate: false,
       showRetrievalQuotationDays: false
     }
   },
