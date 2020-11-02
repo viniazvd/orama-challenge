@@ -5,7 +5,7 @@
       <search-icon class="icon" />
     </md-field>
 
-    <div v-if="!isSmallScreen" class="controls grid-x">
+    <div v-if="isLargeScreen || isVeryLargeScreen" class="controls grid-x">
       <c-range
         class="minimal-application"
 
