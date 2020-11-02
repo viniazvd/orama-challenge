@@ -8,7 +8,7 @@
       <div v-for="({ name: mainStrategy, description }) in getMainStragery(macroStrategy)" :key="mainStrategy">
         <table-title :sub-title="mainStrategy" :description="description" />
 
-        <table-row-desktop v-for="fund in getFunds(mainStrategy)" :key="fund.id" :row="fund" />
+        <component :is="tableRow" v-for="fund in getFunds(mainStrategy)" :key="fund.id" :row="fund" />
       </div>
     </div>
   </div>
@@ -28,6 +28,7 @@ export default {
   components: {
     TableTitle,
     TableFixedHeader,
+    TableRowMobile: () => import('./RowMobile'),
     TableRowDesktop: () => import('./RowDesktop')
   },
 
@@ -62,6 +63,14 @@ export default {
 
     getFunds (mainStrategy) {
       return this.list.filter(item => item.specification.fund_main_strategy.name === mainStrategy)
+    }
+  },
+
+  computed: {
+    tableRow () {
+      if (this.isSmallScreen || this.isMediumScreen) return 'table-row-mobile'
+
+      return 'table-row-desktop'
     }
   }
 }
