@@ -4,7 +4,7 @@
 
     <div class="container grid-x align-center">
       <div class="container-left">
-        <left-filters v-if="isLargeScreen || isVeryLargeScreen" @sync:search="v => search = v" />
+        <left-filters @sync:search="v => search = v" />
 
         <funds-table :list="filteredList" :macro-strategies="macroStrategies" />
 
@@ -101,11 +101,17 @@ export default {
       max-width: 875px;
 
       @include responsive (xs-mobile, mobile) {
+        display: flex;
         flex-basis: 100%;
+        flex-direction: column;
 
         & > .left-filters { order: 2; }
         & > .funds-table { order: 3; }
-        & > .legends { order: 1; max-width: 100% !important; }
+        & > .legends {
+          order: 1;
+          margin-bottom: 30px;
+          max-width: 100% !important;
+        }
       }
 
       & > div:not(:last-child) { margin-bottom: 15px; }
