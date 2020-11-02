@@ -38,6 +38,7 @@ export default {
 <style lang="scss">
 .table-title {
   display: flex;
+  align-items: center;
 
   height: 50px;
   padding: 20px;
