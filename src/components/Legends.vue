@@ -11,16 +11,8 @@
 </template>
 
 <script>
-import StarCircle from './common/icons/StarCircle'
-import CheckCircle from './common/icons/CheckCircle'
-import InformationOutline from './common/icons/InformationOutline'
-import BlockHelper from './common/icons/BlockHelper'
-import Reply from './common/icons/Reply'
-
 export default {
   name: 'legends',
-
-  components: { StarCircle, CheckCircle, InformationOutline, BlockHelper, Reply },
 
   data () {
     return {
