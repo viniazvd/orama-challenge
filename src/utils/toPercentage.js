@@ -3,5 +3,5 @@ export default value => {
     return ''
   }
 
-  return (value * 100).toFixed(2).replace('.', ',') + '%'
+  return (value * 100).toFixed(2).replace('.', ',')
 }
