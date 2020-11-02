@@ -2,10 +2,10 @@
   <div class="table-fixed-header">
     <div>Fundo</div>
     <div>Data da cota</div>
-    <div>Mês(%)</div>
-    <div>2016(%)</div>
-    <div>12M(%)</div>
-    <div>Aplicação mínima(R$)</div>
+    <div>Mês (%)</div>
+    <div>2016 (%)</div>
+    <div>12M (%)</div>
+    <div>Aplicação mínima (R$)</div>
     <div>Prazo de resgate</div>
     <div>Aplicar</div>
   </div>
