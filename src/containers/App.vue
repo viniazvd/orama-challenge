@@ -20,7 +20,7 @@
       <c-loader v-if="isLoading" />
       <right-filters
         v-else-if="isVeryLargeScreen"
-        :list="list"
+        :list="filteredList"
         :strategies="macroStrategies"
       />
     </div>
@@ -83,16 +83,16 @@ export default {
       return findBy(
         this.list,
         this.search,
-        ['simple_name', 'specification.fund_macro_strategy.name', 'specification.fund_main_strategy.name'],
+        ['simple_name'],
         true
       )
     },
 
     macroStrategies () {
-      if (!this.list.length) return []
+      if (!this.filteredList.length) return []
 
       return [
-        ...new Set([...this.list.map(item => item.specification.fund_macro_strategy.name)])
+        ...new Set([...this.filteredList.map(item => item.specification.fund_macro_strategy.name)])
       ]
     }
   },
