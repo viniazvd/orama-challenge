@@ -69,7 +69,7 @@ export default {
   & > .title {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin: { left: 45px; bottom: 10px; }
 
     & > .c-popover-icon {
       margin-left: 5px;
