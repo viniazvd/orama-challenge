@@ -4,7 +4,14 @@
 
     <div class="container grid-x align-center">
       <div class="container-left">
-        <left-filters @sync:search="v => search = v" />
+        <left-filters
+          :rescue-deadline="filters.rescueDeadline"
+          :minimal-application="filters.minimalApplication"
+          @sync:search="query => search = query"
+          @select-level="lvl => filters.level = +lvl"
+          @rescue-deadline="value => filters.rescueDeadline = value"
+          @minimal-application="value => filters.minimalApplication = value"
+        />
 
         <c-loader v-if="isLoading" />
         <funds-table
@@ -32,6 +39,7 @@ import VueCoeImage from 'vue-coe-image'
 import 'vue-coe-image/dist/vue-coe-image.css'
 
 import findBy from '@utils/findBy'
+import toNumber from '@utils/toNumber'
 
 import setupResponsive from '@mixins/setupResponsive'
 
@@ -51,11 +59,16 @@ export default {
 
   data () {
     return {
-      isLoading: false,
-      hasError: false,
       list: [],
       search: '',
-      scrollPosition: 0
+      hasError: false,
+      isLoading: false,
+      scrollPosition: 0,
+      filters: {
+        level: null,
+        rescueDeadline: 270,
+        minimalApplication: 500000
+      }
     }
   },
 
@@ -78,14 +91,14 @@ export default {
 
   computed: {
     filteredList () {
-      if (!this.search) return this.list
+      return findBy(this.list, this.search, ['simple_name'], true)
+        .filter(item => {
+          if (this.filters.level === null) return item
 
-      return findBy(
-        this.list,
-        this.search,
-        ['simple_name'],
-        true
-      )
+          return item.specification.fund_risk_profile.score_range_order === this.filters.level
+        })
+        .filter(item => toNumber(item.operability.retrieval_quotation_days_str) <= this.filters.rescueDeadline)
+        .filter(item => +item.operability.minimum_initial_application_amount <= this.filters.minimalApplication)
     },
 
     macroStrategies () {
@@ -138,8 +151,10 @@ export default {
     flex-flow: row nowrap;
 
      & > .container-left {
-      margin: 0 30px;
+      width: 100%;
       max-width: 875px;
+
+      margin: 0 30px;
 
       @include responsive (xs-mobile, mobile) {
         display: flex;
