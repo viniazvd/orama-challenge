@@ -54,7 +54,7 @@ import toMoney from '@utils/toMoney'
 import formatDate from '@utils/formatDate'
 import toPercentage from '@utils/toPercentage'
 
-import levels from '../../utils/levels'
+import levels from '@utils/levels'
 
 import CButton from '@components:common/CButton'
 

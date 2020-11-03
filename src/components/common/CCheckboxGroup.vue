@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CCheckbox from './CCheckbox'
+import CCheckbox from '@components:common/CCheckbox'
 
 export default {
   name: 'c-checkbox-group',

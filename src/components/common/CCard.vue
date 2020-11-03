@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import levels from '../../utils/levels'
+import levels from '@utils/levels'
 
 export default {
   name: 'c-card',

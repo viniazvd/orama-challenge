@@ -79,9 +79,9 @@ import toMoney from '@utils/toMoney'
 import formatDate from '@utils/formatDate'
 import toPercentage from '@utils/toPercentage'
 
-import CCard from '../common/CCard'
+import CCard from '@components:common/CCard'
 
-import responsive from '../../mixins/responsive'
+import responsive from '@mixins/responsive'
 
 export default {
   name: 'table-row-desktop',

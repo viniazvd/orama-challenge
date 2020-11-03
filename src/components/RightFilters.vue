@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import findBy from '../utils/findBy'
+import findBy from '@utils/findBy'
 
-import CCheckboxGroup from './common/CCheckboxGroup'
+import CCheckboxGroup from '@components:common/CCheckboxGroup'
 
 export default {
   name: 'right-filters',

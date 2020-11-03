@@ -19,8 +19,8 @@ import responsive from '@mixins/responsive'
 
 import removeDuplicates from '@utils/removeDuplicates'
 
-import TableTitle from './Title'
-import TableFixedHeader from './FixedHeader'
+import TableTitle from '@components/table/Title'
+import TableFixedHeader from '@components/table/FixedHeader'
 
 export default {
   name: 'table-main',

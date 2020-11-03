@@ -39,12 +39,12 @@
 </template>
 
 <script>
-import toMoney from '../utils/toMoney'
-import responsive from '../mixins/responsive'
+import toMoney from '@utils/toMoney'
+import responsive from '@mixins/responsive'
 
-import CRange from './common/CRange'
-import CRangeColor from './common/CRangeColor'
-import SearchIcon from './common/icons/Search'
+import CRange from '@components:common/CRange'
+import CRangeColor from '@components:common/CRangeColor'
+import SearchIcon from '@components:common/icons/Search'
 
 export default {
   name: 'left-filters',

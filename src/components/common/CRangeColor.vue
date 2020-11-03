@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import levels from '../../utils/levels'
+import levels from '@utils/levels'
 
 import CPopoverIcon from '@components:common/CPopoverIcon'
 

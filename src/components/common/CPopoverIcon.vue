@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import CCard from '../common/CCard'
-import CPopover from '../common/CPopover'
+import CCard from '@components:common/CCard'
+import CPopover from '@components:common/CPopover'
 
 export default {
   name: 'c-popover-icon',

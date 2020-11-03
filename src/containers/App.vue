@@ -31,7 +31,7 @@
 import VueCoeImage from 'vue-coe-image'
 import 'vue-coe-image/dist/vue-coe-image.css'
 
-import findBy from '../utils/findBy'
+import findBy from '@utils/findBy'
 
 import setupResponsive from '@mixins/setupResponsive'
 
