@@ -1,5 +1,5 @@
 <template>
-  <div class="table-main cell rounded">
+  <div :class="classes">
     <table-fixed-header v-if="!isSmallScreen && !isMediumScreen" />
 
     <div v-for="macroStrategy in macroStrategies" :key="macroStrategy" class="table">
@@ -35,6 +35,7 @@ export default {
   mixins: [responsive],
 
   props: {
+    scrollPosition: Number,
     list: { type: Array, required: true },
     macroStrategies: { type: Array, required: true }
   },
@@ -67,6 +68,10 @@ export default {
   },
 
   computed: {
+    classes () {
+      return ['table-main', { '--is-fixed': this.scrollPosition >= 600 }]
+    },
+
     tableRow () {
       if (this.isSmallScreen || this.isMediumScreen) return 'table-row-mobile'
 
@@ -82,5 +87,18 @@ export default {
   max-width: 873px;
   height: unset !important;
   // box-shadow: $box-shadow;
+
+  &.--is-fixed {
+    & > .table:nth-child(2) { margin-top: 111px; }
+
+    & > .table-fixed-header {
+      top: 0;
+      position: fixed;
+
+      z-index: 1;
+      width: 100%;
+      max-width: 873px;
+    }
+  }
 }
 </style>
