@@ -90,10 +90,10 @@ export default {
 
   components: {
     CCard,
-    Detail: () => import('./Detail'),
-    CTooltip: () => import('../common/CTooltip'),
-    CTransition: () => import('../common/CTransition'),
-    CPopoverIcon: () => import('../common/CPopoverIcon')
+    Detail: () => import('@components/table/Detail'),
+    CTooltip: () => import('@components:common/CTooltip'),
+    CTransition: () => import('@components:common/CTransition'),
+    CPopoverIcon: () => import('@components:common/CPopoverIcon')
   },
 
   props: {
