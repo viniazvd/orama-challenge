@@ -1,9 +1,9 @@
 <template>
-  <div class="row-wrapper-desktop">
+  <div class="row-wrapper-desktop" :style="{ opacity: row.is_close ? '0.6' : '1' }">
     <c-card
       class="row"
       :level="row.specification.fund_risk_profile.score_range_order"
-      @click.native="showDetails = !showDetails"
+      @click.native="!row.is_close && (showDetails = !showDetails)"
     >
       <div>
         <div class="name-icons">
@@ -65,7 +65,10 @@
         <div class="info">3º dia útil anterior ao último dia útil do 2º mês calendário subsequente à solicitação de resgate</div>
       </c-popover-icon>
 
-      <div><reply /></div>
+      <div>
+        <reply v-if="row.is_active" />
+        <check-circle v-if="row.is_close" />
+      </div>
     </c-card>
 
     <c-transition v-show="showDetails && (isLargeScreen || isVeryLargeScreen)">
