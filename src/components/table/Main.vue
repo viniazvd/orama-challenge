@@ -69,7 +69,7 @@ export default {
 
   computed: {
     classes () {
-      return ['table-main', { '--is-fixed': this.scrollPosition >= 600 }]
+      return ['table-main', { '--is-fixed': this.scrollPosition >= 630 }]
     },
 
     tableRow () {
@@ -89,7 +89,7 @@ export default {
   // box-shadow: $box-shadow;
 
   &.--is-fixed {
-    & > .table:nth-child(2) { margin-top: 111px; }
+    & > .table:nth-child(2) { margin-top: 100px; }
 
     & > .table-fixed-header {
       top: 0;
