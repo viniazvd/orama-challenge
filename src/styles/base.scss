@@ -1,4 +1,6 @@
 @import './mixins.scss';
+@import './settings.scss';
+
 @import "../assets/css/foundation.scss";
 
 *,
@@ -25,6 +27,11 @@ html,
   box-shadow: none;
 
   &:focus { border: unset; box-shadow: none; }
+}
+
+.grid-margin-y > .cell {
+  margin-top: 7.5px !important;
+  margin-bottom: 7.5px !important;
 }
 
 .md-focused {
@@ -88,7 +95,8 @@ html,
   background: unset !important;
 }
 
-.grid-margin-y > .cell {
-  margin-top: 7.5px !important;
-  margin-bottom: 7.5px !important;
-}
+input:-ms-input-placeholder { font-size: $font-size !important; } // IE
+input::-moz-placeholder { font-size: $font-size !important; } // Firefox 19+
+input:-moz-placeholder { font-size: $font-size !important; }  // Firefox 18-
+input::-webkit-input-placeholder {  font-size: $font-size !important;  } // chrome/safari
+
