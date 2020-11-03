@@ -6,16 +6,22 @@
       @click.native="showDetails = !showDetails"
     >
       <div>
-        <div class="name">{{ row.simple_name }} </div>
-        <div class="icons">
-          <c-popover-icon v-if="row.specification.is_qualified" component="star-circle">
-            Fundo para investidor qualificado
-          </c-popover-icon>
+        <div class="name-icons">
+          <div class="name">{{ row.simple_name }} </div>
+          <div class="icons">
+            <c-popover-icon v-if="row.specification.is_qualified" component="star-circle">
+              Fundo para investidor qualificado
+            </c-popover-icon>
 
-          <c-popover-icon component="check-circle">
-            Você já investe neste fundo
-          </c-popover-icon>
+            <c-popover-icon component="check-circle">
+              Você já investe neste fundo
+            </c-popover-icon>
+          </div>
         </div>
+
+        <span class="strategies">
+          {{ row.specification.fund_macro_strategy.name }} | {{ row.specification.fund_main_strategy.name }}
+        </span>
       </div>
 
       <c-tooltip
@@ -144,19 +150,32 @@ export default {
       &:not(:first-child) { text-align: right; }
       &:first-child {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
 
         overflow: unset;
         white-space: unset;
 
-        & > .name {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          padding-right: 5px;
+        & > .name-icons {
+          display: flex;
+
+          & > .name {
+            font-size: 13px;
+            padding-right: 5px;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+
+          & > .icons { display: flex; }
         }
-        & > .icons { display: flex; }
+
+        & > .strategies {
+          opacity: 0.4;
+          font-size: 11px;
+        }
       }
     }
 
