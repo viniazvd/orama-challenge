@@ -1,18 +1,25 @@
 <template>
-  <div v-if="!isLoading" id="app" class="app">
+  <div id="app" class="app" @scroll.capture="setHeaderPosition">
     <img class="logo" alt="Vue logo" src="../assets/logo.png">
 
     <div class="container grid-x align-center">
       <div class="container-left">
         <left-filters @sync:search="v => search = v" />
 
-        <funds-table :list="filteredList" :macro-strategies="macroStrategies" />
+        <c-loader v-if="isLoading" />
+        <funds-table
+          v-else
+          :list="filteredList"
+          :scroll-position="scrollPosition"
+          :macro-strategies="macroStrategies"
+        />
 
         <legends />
       </div>
 
+      <c-loader v-if="isLoading" />
       <right-filters
-        v-if="isVeryLargeScreen"
+        v-else-if="isVeryLargeScreen"
         :list="list"
         :strategies="macroStrategies"
       />
@@ -25,6 +32,8 @@ import findBy from '../utils/findBy'
 
 import setupResponsive from '@mixins/setupResponsive'
 
+import CLoader from '@components:common/CLoader'
+
 import LeftFilters from '@components/LeftFilters'
 import RightFilters from '@components/RightFilters'
 import FundsTable from '@components/table/Main'
@@ -33,7 +42,7 @@ import Legends from '@components/Legends'
 export default {
   name: 'App',
 
-  components: { LeftFilters, FundsTable, Legends, RightFilters },
+  components: { CLoader, LeftFilters, FundsTable, Legends, RightFilters },
 
   mixins: [setupResponsive],
 
@@ -42,7 +51,8 @@ export default {
       isLoading: false,
       hasError: false,
       list: [],
-      search: ''
+      search: '',
+      scrollPosition: 0
     }
   },
 
@@ -79,6 +89,14 @@ export default {
       return [
         ...new Set([...this.list.map(item => item.specification.fund_macro_strategy.name)])
       ]
+    }
+  },
+
+  methods: {
+    setHeaderPosition (event) {
+      if (this.isSmallScreen || this.isMediumScreen) return
+
+      this.scrollPosition = event.target.scrollTop
     }
   }
 }
