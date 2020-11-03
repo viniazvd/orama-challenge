@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-coe-image": "^0.2.1",
     "vue-material": "^1.0.0-beta-15",
     "vue-material-design-icons": "^4.10.0",
     "vue-range-slider": "^0.6.0"
