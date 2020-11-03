@@ -1,3 +1,4 @@
+@import './mixins.scss';
 @import "../assets/css/foundation.scss";
 
 *,
@@ -41,10 +42,13 @@ html,
 
 .md-checkbox {
   margin: 0;
+  max-width: 100%;
+  overflow: hidden;
 
   & > .md-checkbox-label {
     height: unset;
     font-size: 13px;
+    @include truncate;
   }
 
   &.md-checked > .md-checkbox-container {

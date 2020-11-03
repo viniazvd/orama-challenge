@@ -30,8 +30,8 @@ export default {
 .c-checkbox {
   margin: 0;
   width: 100%;
+  height: 40px;
   max-width: 270px;
-  min-height: 40px;
   background: white;
   padding: 5px 25px 5px 15px;
   box-shadow: 6px 6px 25px 0 rgba(97,120,146,0.12);
