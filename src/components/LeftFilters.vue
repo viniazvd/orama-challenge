@@ -9,19 +9,23 @@
       <c-range
         class="minimal-application"
 
+        :step="100"
+
         title="Aplicação mínima"
         :footer="`Até ${toMoney(minimalApplication)}`"
 
         :min="0"
-        :max="500000"
+        :max="5000"
         :value="minimalApplication"
-        @input="value => minimalApplication = value"
+        @input="value => $emit('minimal-application', value)"
       />
 
-      <c-range-color class="risk-profile" />
+      <c-range-color class="risk-profile" v-on="$listeners" />
 
       <c-range
         class="rescue-deadline"
+
+        :step="1"
 
         title="Prazo de resgate"
         :footer="`Até ${rescueDeadline} dias úteis`"
@@ -29,7 +33,7 @@
         :min="0"
         :max="270"
         :value="rescueDeadline"
-        @input="value => rescueDeadline = value"
+        @input="value => $emit('rescue-deadline', value)"
       />
 
     </div>
@@ -53,11 +57,14 @@ export default {
 
   components: { CRange, CRangeColor, SearchIcon },
 
+  props: {
+    rescueDeadline: Number,
+    minimalApplication: Number
+  },
+
   data () {
     return {
-      search: '',
-      rescueDeadline: 0,
-      minimalApplication: 0
+      search: ''
     }
   },
 
