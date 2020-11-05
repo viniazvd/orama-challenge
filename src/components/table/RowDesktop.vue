@@ -161,6 +161,7 @@ export default {
 
         & > .name-icons {
           display: flex;
+          justify-content: space-between;
 
           & > .name {
             font-size: 13px;
