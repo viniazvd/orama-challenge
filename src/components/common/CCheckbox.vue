@@ -33,8 +33,8 @@ export default {
   height: 40px;
   max-width: 270px;
   background: white;
+  box-shadow: $box-shadow;
   padding: 5px 25px 5px 15px;
-  box-shadow: 6px 6px 25px 0 rgba(97,120,146,0.12);
 
   display: flex;
   align-items: center;
