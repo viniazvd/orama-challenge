@@ -3,15 +3,24 @@
     <div class="title">Filtrar por estratégias:</div>
 
     <c-checkbox-group
-      v-for="strategy in strategies"
-      :key="strategy"
+      v-for="(items, strategy) in strategies"
+      item-event-name="filter:main-strategy"
+      main-event-name="filter:macro-strategy"
+      :key="items.main"
+      :items="items"
       :description="strategy"
-      :items="getItems(strategy)"
+      v-on="$listeners"
     />
 
     <div class="title manager">Filtrar por gestores:</div>
 
-    <c-checkbox-group description="Gestores" :items="filteredManagers">
+    <c-checkbox-group
+      description="Gestores"
+      item-event-name="filter:manager"
+      main-event-name="filter:managers"
+      :items="filteredManagers"
+      v-on="$listeners"
+    >
       <md-field class="search">
         <md-input placeholder="Buscar" v-model="search" />
       </md-field>
@@ -31,7 +40,9 @@ export default {
 
   props: {
     list: { type: Array, required: true },
-    strategies: { type: Array, required: true }
+    managers: { type: Array, required: true },
+    strategies: { type: Object, required: true },
+    macroStrategies: { type: Array, required: true }
   },
 
   data () {
@@ -41,27 +52,13 @@ export default {
   },
 
   computed: {
-    managers () {
-      return [...new Set([...this.list.map(item => item.fund_manager.name)])]
-    },
-
     filteredManagers () {
       if (!this.search) return this.managers
 
-      const managers = this.managers.map(manager => ({ name: manager }))
-
-      return findBy(managers, this.search, ['name'], true)
+      return this.managers
+        .map(manager => ({ name: manager }))
+        .filter(manager => findBy(manager.name, this.search, ['main']))
         .map(({ name }) => name)
-    }
-  },
-
-  methods: {
-    getItems (strategy) {
-      const mainStrategies = this.list
-        .filter(item => item.specification.fund_macro_strategy.name === strategy)
-        .map(item => item.specification.fund_main_strategy.name)
-
-      return [...new Set([...mainStrategies])]
     }
   }
 }

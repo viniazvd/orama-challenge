@@ -2,7 +2,9 @@
   <div :class="classes">
     <table-fixed-header v-if="!isSmallScreen && !isMediumScreen" />
 
-    <div v-for="macroStrategy in macroStrategies" :key="macroStrategy" class="table">
+    <div v-if="!list.length" class="empty-table">O fundo buscado não está disponível nesta lista.</div>
+
+    <div v-else v-for="macroStrategy in filteredMacroStrategies" :key="macroStrategy" class="table">
       <table-title :title="macroStrategy" :description="getDescription(macroStrategy)" />
 
       <div v-for="({ name: mainStrategy, description }) in getMainStragery(macroStrategy)" :key="mainStrategy">
@@ -37,7 +39,26 @@ export default {
   props: {
     scrollPosition: Number,
     list: { type: Array, required: true },
+    filters: { type: Object, required: true },
     macroStrategies: { type: Array, required: true }
+  },
+
+  computed: {
+    classes () {
+      return ['table-main', { '--is-fixed': this.scrollPosition >= 630 }]
+    },
+
+    tableRow () {
+      if (this.isSmallScreen || this.isMediumScreen) return 'table-row-mobile'
+
+      return 'table-row-desktop'
+    },
+
+    filteredMacroStrategies () {
+      return this.filters.strategies
+        .filter(strategy => strategy.items.some(({ isChecked }) => isChecked))
+        .map(({ macro }) => macro)
+    }
   },
 
   methods: {
@@ -65,18 +86,6 @@ export default {
     getFunds (mainStrategy) {
       return this.list.filter(item => item.specification.fund_main_strategy.name === mainStrategy)
     }
-  },
-
-  computed: {
-    classes () {
-      return ['table-main', { '--is-fixed': this.scrollPosition >= 630 }]
-    },
-
-    tableRow () {
-      if (this.isSmallScreen || this.isMediumScreen) return 'table-row-mobile'
-
-      return 'table-row-desktop'
-    }
   }
 }
 </script>
@@ -86,7 +95,18 @@ export default {
   order: 2;
   max-width: 873px;
   height: unset !important;
-  // box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+
+  & > .empty-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include text;
+    height: 240px;
+    font-size: 14px;
+    background-color: white;
+  }
 
   &.--is-fixed {
     & > .table:nth-child(2) { margin-top: 100px; }

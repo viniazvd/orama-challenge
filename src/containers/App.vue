@@ -2,7 +2,9 @@
   <div id="app" class="app">
     <vue-coe-image class="logo" :src="require('../assets/logo.png')" />
 
-    <div class="container grid-x align-center">
+    <div v-if="hasError">Erro ao carregar dados..</div>
+
+    <div v-else class="container grid-x align-center">
       <div class="container-left">
         <left-filters
           :rescue-deadline="filters.rescueDeadline"
@@ -17,6 +19,7 @@
         <funds-table
           v-else
           :list="filteredList"
+          :filters="filters"
           :scroll-position="scrollPosition"
           :macro-strategies="macroStrategies"
         />
@@ -28,7 +31,15 @@
       <right-filters
         v-else-if="isVeryLargeScreen"
         :list="filteredList"
-        :strategies="macroStrategies"
+        :strategies="strategies"
+        :managers="filters.managers"
+        :macro-strategies="macroStrategies"
+
+        @filter:manager="filterMainManager"
+        @filter:managers="filterMacroManager"
+
+        @filter:main-strategy="filterMainStrategy"
+        @filter:macro-strategy="filterMacroStrategy"
       />
     </div>
   </div>
@@ -40,6 +51,7 @@ import 'vue-coe-image/dist/vue-coe-image.css'
 
 import findBy from '@utils/findBy'
 import toNumber from '@utils/toNumber'
+import removeDuplicates from '@utils/removeDuplicates'
 
 import setupResponsive from '@mixins/setupResponsive'
 
@@ -53,7 +65,7 @@ import Legends from '@components/Legends'
 export default {
   name: 'App',
 
-  components: { VueCoeImage, CLoader, LeftFilters, FundsTable, Legends, RightFilters },
+  components: { VueCoeImage, CLoader, LeftFilters, RightFilters, FundsTable, Legends },
 
   mixins: [setupResponsive],
 
@@ -66,16 +78,33 @@ export default {
       scrollPosition: 0,
       filters: {
         level: null,
+        managers: [],
+        strategies: [],
         rescueDeadline: 270,
         minimalApplication: 500000
       }
     }
   },
 
+  watch: {
+    isLoading (status) {
+      if (status) return
+
+      this.filters.strategies = Object
+        .entries(this.strategies)
+        .map(([macro, main]) => ({ macro, items: main }))
+
+      const managers = this.filteredList.map(item => ({
+        isChecked: true,
+        main: item.fund_manager.name
+      }))
+
+      this.filters.managers = removeDuplicates(managers, 'main')
+    }
+  },
+
   async created () {
     this.isLoading = true
-
-    window.addEventListener('scroll', this.setHeaderPosition)
 
     const url = 'https://s3.amazonaws.com/orama-media/json/fund_detail_full.json?limit=1000&offset=0&serializer=fund_detail_full'
 
@@ -89,28 +118,92 @@ export default {
     this.isLoading = false
   },
 
+  mounted () {
+    window.addEventListener('scroll', this.setHeaderPosition)
+  },
+
   computed: {
     filteredList () {
-      return findBy(this.list, this.search, ['simple_name'], true)
-        .filter(item => {
-          if (this.filters.level === null) return item
-
-          return item.specification.fund_risk_profile.score_range_order === this.filters.level
-        })
-        .filter(item => toNumber(item.operability.retrieval_quotation_days_str) <= this.filters.rescueDeadline)
-        .filter(item => +item.operability.minimum_initial_application_amount <= this.filters.minimalApplication)
+      return this.list.filter(item => {
+        return findBy(item, this.search, ['simple_name']) &&
+          this.levelFilter(item) &&
+          this.managersFilter(item) &&
+          this.rescueDeadlineFilter(item) &&
+          this.strategiesFilter(item) &&
+          this.minimalApplicationFilter(item)
+      })
     },
 
     macroStrategies () {
-      if (!this.filteredList.length) return []
+      if (!this.list.length) return []
 
       return [
-        ...new Set([...this.filteredList.map(item => item.specification.fund_macro_strategy.name)])
+        ...new Set([...this.list.map(item => item.specification.fund_macro_strategy.name)])
       ]
+    },
+
+    strategies () {
+      return this.macroStrategies.reduce((acc, macroStrategy) => {
+        acc[macroStrategy] = this.getStragegies(macroStrategy)
+
+        return acc
+      }, {})
+    },
+
+    filteredStrategies () {
+      return this.filters.strategies.reduce((acc, item) => {
+        const items = item.items
+          .filter(({ isChecked }) => !isChecked)
+          .map(({ main }) => main)
+
+        acc = [...acc, ...items]
+
+        return acc
+      }, [])
+    },
+
+    filteredManagers () {
+      return this.filters.managers
+        .filter(({ isChecked }) => !isChecked)
+        .map(({ main }) => main)
     }
   },
 
   methods: {
+    getStragegies (strategy) {
+      const mainStrategies = this.filteredList
+        .filter(item => item.specification.fund_macro_strategy.name === strategy)
+        .map(item => ({
+          isChecked: true,
+          main: item.specification.fund_main_strategy.name
+        }))
+
+      return removeDuplicates(mainStrategies, 'main')
+    },
+
+    rescueDeadlineFilter (item) {
+      return toNumber(item.operability.retrieval_quotation_days_str) <= this.filters.rescueDeadline
+    },
+
+    levelFilter (item) {
+      return this.filters.level === null ||
+        item.specification.fund_risk_profile.score_range_order === this.filters.level
+    },
+
+    minimalApplicationFilter (item) {
+      return +item.operability.minimum_initial_application_amount <= this.filters.minimalApplication
+    },
+
+    strategiesFilter (item) {
+      return !this.filteredStrategies.length ||
+        !this.filteredStrategies.includes(item.specification.fund_main_strategy.name)
+    },
+
+    managersFilter (item) {
+      return !this.filteredManagers.length ||
+        !this.filteredManagers.includes(item.fund_manager.name)
+    },
+
     setHeaderPosition () {
       if (this.isSmallScreen || this.isMediumScreen) return
 
@@ -124,6 +217,44 @@ export default {
           : document.body.scrollTop
 
       this.scrollPosition = y
+    },
+
+    filterMacroStrategy ({ macro, isChecked }) {
+      this.filters.strategies = this.filters.strategies.map(filter => {
+        if (filter.macro !== macro) return filter
+
+        return {
+          ...filter,
+          items: filter.items.map(item => ({ ...item, isChecked }))
+        }
+      })
+    },
+
+    filterMainStrategy ({ macro, main, isChecked }) {
+      this.filters.strategies = this.filters.strategies.map(filter => {
+        if (filter.macro !== macro) return filter
+
+        return {
+          ...filter,
+          items: filter.items.map(item => {
+            if (item.main !== main) return item
+
+            return { ...item, isChecked }
+          })
+        }
+      })
+    },
+
+    filterMacroManager ({ isChecked }) {
+      this.filters.managers = this.filters.managers.map(manager => ({ ...manager, isChecked }))
+    },
+
+    filterMainManager ({ main, isChecked }) {
+      this.filters.managers = this.filters.managers.map(manager => {
+        if (manager.main !== main) return manager
+
+        return { ...manager, isChecked }
+      })
     }
   },
 
