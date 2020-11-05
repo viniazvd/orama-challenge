@@ -14,7 +14,8 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unused-expressions': 'off',
-    'operator-linebreak': 'off'
+    'operator-linebreak': 'off',
+    'no-return-assign': 'off'
     // 'vue/custom-event-name-casing': ['error', { ignores: ['click:row', '/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
   }
 }
