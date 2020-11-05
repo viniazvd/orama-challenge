@@ -1,5 +1,5 @@
 <template>
-  <div class="row-wrapper-desktop" :style="{ opacity: row.is_close ? '0.6' : '1' }">
+  <div class="row-wrapper-desktop" :style="{ opacity: row.is_close ? '0.4' : '1' }">
     <c-card
       class="row"
       :level="row.specification.fund_risk_profile.score_range_order"
