@@ -22,7 +22,11 @@
       v-on="$listeners"
     >
       <md-field class="search">
-        <md-input placeholder="Buscar" v-model="search" />
+        <md-input
+          placeholder="Buscar"
+          :value="search"
+          @input="handleInput"
+        />
       </md-field>
     </c-checkbox-group>
   </div>
@@ -30,6 +34,7 @@
 
 <script>
 import findBy from '@utils/findBy'
+import debounce from '@utils/debounce'
 
 import CCheckboxGroup from '@components:common/CCheckboxGroup'
 
@@ -60,6 +65,12 @@ export default {
         .filter(manager => findBy(manager.name, this.search, ['main']))
         .map(({ name }) => name)
     }
+  },
+
+  methods: {
+    handleInput: debounce(function (value) {
+      this.search = value
+    })
   }
 }
 </script>

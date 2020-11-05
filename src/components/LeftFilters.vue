@@ -1,7 +1,12 @@
 <template>
   <div class="left-filters">
     <md-field class="search">
-      <md-input placeholder="Buscar fundo por nome" v-model="search" />
+      <md-input
+        placeholder="Buscar fundo por nome"
+        :value="search"
+        @input="handleInput"
+      />
+
       <search-icon class="icon" />
     </md-field>
 
@@ -46,6 +51,8 @@
 import toMoney from '@utils/toMoney'
 import responsive from '@mixins/responsive'
 
+import debounce from '@utils/debounce'
+
 import CRange from '@components:common/CRange'
 import CRangeColor from '@components:common/CRangeColor'
 import SearchIcon from '@components:common/icons/Search'
@@ -74,7 +81,13 @@ export default {
     }
   },
 
-  methods: { toMoney }
+  methods: {
+    toMoney,
+
+    handleInput: debounce(function (value) {
+      this.search = value
+    })
+  }
 }
 </script>
 
