@@ -46,8 +46,7 @@ export default {
   props: {
     list: { type: Array, required: true },
     managers: { type: Array, required: true },
-    strategies: { type: Object, required: true },
-    macroStrategies: { type: Array, required: true }
+    strategies: { type: Object, required: true }
   },
 
   data () {
