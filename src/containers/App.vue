@@ -171,7 +171,7 @@ export default {
 
   methods: {
     getStragegies (strategy) {
-      const mainStrategies = this.filteredList
+      const mainStrategies = this.list
         .filter(item => item.specification.fund_macro_strategy.name === strategy)
         .map(item => ({
           isChecked: true,
