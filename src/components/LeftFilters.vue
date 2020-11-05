@@ -22,7 +22,7 @@
         :min="0"
         :max="5000"
         :value="minimalApplication"
-        @input="value => $emit('minimal-application', value)"
+        @input="value => $emit('set:minimal-application', value)"
       />
 
       <c-range-color class="risk-profile" v-on="$listeners" />
@@ -38,7 +38,7 @@
         :min="0"
         :max="270"
         :value="rescueDeadline"
-        @input="value => $emit('rescue-deadline', value)"
+        @input="value => $emit('set:rescue-deadline', value)"
       />
 
     </div>

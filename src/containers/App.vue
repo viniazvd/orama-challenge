@@ -10,9 +10,9 @@
           :rescue-deadline="filters.rescueDeadline"
           :minimal-application="filters.minimalApplication"
           @sync:search="query => search = query"
-          @select-level="lvl => filters.level = +lvl"
-          @rescue-deadline="value => filters.rescueDeadline = value"
-          @minimal-application="value => filters.minimalApplication = value"
+          @set:level="lvl => filters.level = +lvl"
+          @set:rescue-deadline="value => filters.rescueDeadline = value"
+          @set:minimal-application="value => filters.minimalApplication = value"
         />
 
         <c-loader v-if="isLoading" />

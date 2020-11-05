@@ -17,7 +17,7 @@
           :key="level"
           :style="{ background: color, height: 15 + (level * 2) + 'px' }"
           @mouseover="activeLevel = level"
-          @click="$emit('select-level', level)"
+          @click="$emit('set:level', level)"
         />
       </div>
 
