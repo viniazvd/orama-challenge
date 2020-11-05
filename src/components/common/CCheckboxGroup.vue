@@ -15,10 +15,10 @@
         v-for="item in internalItems"
         class="item"
         :key="item.id"
-        :model="item.isChecked"
-        @change="v => onToggleItem(v, item)"
+        v-model="item.isChecked"
+        @change="onToggleItem(item)"
       >
-        {{ item.description }}
+        {{ item.main }}
       </md-checkbox>
     </c-transition>
   </div>
@@ -37,10 +37,9 @@ export default {
 
   props: {
     description: { type: String },
-    items: {
-      type: Array,
-      validator: value => value.every(λ => typeof λ === 'string')
-    }
+    mainEventName: { type: String },
+    itemEventName: { type: String },
+    items: { type: Array, required: true }
   },
 
   data () {
@@ -56,7 +55,9 @@ export default {
     items: {
       deep: true,
       immediate: true,
-      handler: 'initData'
+      handler () {
+        this.internalItems = [...this.items]
+      }
     },
 
     changes () {
@@ -67,24 +68,25 @@ export default {
   },
 
   methods: {
-    initData () {
-      this.internalItems = this.items.map((item, i) => ({
-        id: i,
-        isChecked: true,
-        description: item
-      }))
-    },
-
     onToggleMain (v) {
       this.isChecked = v
 
       this.internalItems = this.internalItems.map(item => ({ ...item, isChecked: v }))
+
+      this.$emit(this.mainEventName, {
+        macro: this.description,
+        isChecked: this.isChecked
+      })
     },
 
-    onToggleItem (v, item) {
-      item.isChecked = v
-
+    onToggleItem ({ isChecked, main }) {
       this.changes++
+
+      this.$emit(this.itemEventName, {
+        main,
+        isChecked,
+        macro: this.description
+      })
     }
   }
 }
