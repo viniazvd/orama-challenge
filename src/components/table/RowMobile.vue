@@ -1,5 +1,5 @@
 <template>
-  <div class="row-wrapper-mobile" @click="redirect">
+  <div :class="classes" @click="redirect">
     <div class="row">
       <span class="title">{{ row.simple_name }}</span>
       <span class="risk-color" :style="color" />
@@ -93,6 +93,10 @@ export default {
   },
 
   computed: {
+    classes () {
+      return ['row-wrapper-mobile', { '--is-closed': !this.row.is_closed }]
+    },
+
     color () {
       const level = this.row.specification.fund_risk_profile.score_range_order
 
@@ -111,6 +115,14 @@ export default {
   padding: 25px 15px 20px;
   background-color: white;
   border-bottom: solid 1px #eff0f2;
+
+  &.--is-closed {
+    &:hover { opacity: 0.6; }
+
+    & > .row:not(:last-child) { opacity: 0.4; }
+
+    & > .row:last-child > .reply { opacity: 0.2; cursor: not-allowed; }
+  }
 
   &:hover { background: #e6fcfc; }
 
