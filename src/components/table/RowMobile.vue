@@ -94,7 +94,7 @@ export default {
 
   computed: {
     classes () {
-      return ['row-wrapper-mobile', { '--is-closed': !this.row.is_closed }]
+      return ['row-wrapper-mobile', { '--is-closed': this.row.is_closed }]
     },
 
     color () {
